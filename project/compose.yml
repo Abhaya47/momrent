@@ -1,0 +1,32 @@
+#version: "3"
+
+networks:
+  rental:
+    external: true
+services:
+  rental:
+    build:
+      context: ./app/
+    container_name: rental
+    ports:
+      - 8999:8000
+    volumes:
+      - ./../rent:/var/www/html/:rw
+    networks:
+      rental:
+        aliases:
+          - rental
+
+  rentalpost:
+    image: mysql:8.0.42-debian
+    restart: always
+    ports:
+      - 3360:3306
+    volumes:
+      - ./infrastructure/database/data/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      rental:
+        aliases:
+          - rentalpost
