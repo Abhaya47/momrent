@@ -1,10 +1,9 @@
 <?php
 
-use rent\Database\DatabaseConnection;
-use rent\Router\Router;
+include_once __DIR__ . '/vendor/autoload.php';
 
-include("Database/DatabaseConnection.php");
-include("Router/Router.php");
+use App\Database\DatabaseConnection;
+use App\router\Router;
 
-$database = new DatabaseConnection();
+$db = (new DatabaseConnection())->getConnection();
 $router = new Router($_REQUEST);

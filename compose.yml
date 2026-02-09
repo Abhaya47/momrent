@@ -2,16 +2,16 @@
 
 networks:
   rental:
-    external: true
+    external: false
 services:
   rental:
     build:
-      context: ./app/
+      context: project/app
     container_name: rental
     ports:
       - 8999:8000
     volumes:
-      - ./../rent:/var/www/html/:rw
+      - ./rent/:/var/www/html/:rw
     networks:
       rental:
         aliases:
@@ -21,10 +21,11 @@ services:
     image: mysql:8.0.42-debian
     restart: always
     ports:
-      - 3360:3306
+      - 3399:3306
     volumes:
-      - ./infrastructure/database/data/:/var/lib/mysql
+      - ./project/infrastructure/database/data/:/var/lib/mysql
     environment:
+
       MYSQL_ROOT_PASSWORD: example
     networks:
       rental:

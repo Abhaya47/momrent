@@ -1,14 +1,17 @@
 <?php
 
-namespace rent\Database;
+namespace App\Database;
+
 use PDO;
 use PDOException;
 
 class DatabaseConnection
 {
-    public function __construct() {
+    private PDO $connection;
+    public function __construct()
+    {
         try {
-            $connection = new PDO(
+            $this->connection = new PDO(
                 "mysql:host=rentalpost;port=3306;dbname=rent;charset=utf8mb4",
                 "root",
                 "example",
@@ -16,10 +19,17 @@ class DatabaseConnection
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ]
             );
-            echo "Connected successfully";
         }
         catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die("Connection failed: " . $e->getMessage());
         }
+    }
+
+    public function getConnection(): PDO
+    {
+        if (!isset($this->connection)) {
+            $this->__construct();
+        }
+        return $this->connection;
     }
 }

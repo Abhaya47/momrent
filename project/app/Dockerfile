@@ -28,7 +28,11 @@ RUN addgroup --gid $HOST_GID docker && \
         $APP_PATH \
         $APP_PATH/var
 
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
+
 RUN chmod u+w /var/www/html
+
+
 
 #run the rest as docker
 USER docker

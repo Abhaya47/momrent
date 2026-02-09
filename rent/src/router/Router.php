@@ -1,6 +1,6 @@
 <?php
 
-namespace rent\Router;
+namespace App\router;
 
 class Router
 {
