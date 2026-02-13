@@ -21,7 +21,7 @@ services:
     image: mysql:8.0.42-debian
     restart: always
     ports:
-      - 3399:3306
+      - 3456:3306
     volumes:
       - ./project/infrastructure/database/data/:/var/lib/mysql
     environment:
